@@ -1,4 +1,9 @@
 <h1>
   <%= gravatar_for @user %>
-  <%= @user.name %>
+  <br />
+  name:<%= simple_format(h(@user.name)) %>
+  email:<%= simple_format(h(@user.email)) %>
+  profile:<%= simple_format(h(@user.profile)) %>
+  location:<%= simple_format(h(@user.location)) %>
+  </div>
 </h1>
