@@ -1,0 +1,8 @@
+<li id="user-<%= user.id %>">
+  <%= link_to gravatar_for(user, size: 70), user %>
+  <span class="user"><%= link_to user.name, user %></span>
+  <span class="location">location:<%= simple_format(h(user.location)) %></span>
+  <!--<span class="profile">profile:<%= simple_format(h(user.profile)) %></span>-->
+  <span class="microposts"><%= pluralize(user.microposts.count, "micropost") %></span>
+  <%= render partial: 'follow_form', locals: { user: user } if logged_in? %>
+</li>
