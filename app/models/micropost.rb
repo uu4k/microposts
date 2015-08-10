@@ -5,4 +5,6 @@ class Micropost < ActiveRecord::Base
   validates :content, presence: true, length: { maximum: 140 }
   has_many :favorites
   has_many :favorite_users, class_name: "User", through: :favorites, source: :user 
+  
+  mount_uploader :image, ImageUploader
 end
