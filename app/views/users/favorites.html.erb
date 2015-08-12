@@ -6,7 +6,7 @@
   </aside>
   <div class="col-md-8">
     <%= render partial: 'follow_form', locals: { user: @user } if logged_in? %>
-    <h3>Microposts (<%= @user.microposts.count %>)</h3>
+    <h3>Favorites (<%= @user.favorites.count %>)</h3>
     <div id="microposts">
     <%= render partial: 'shared/micropost', locals: { microposts: @microposts } %>
     </div>

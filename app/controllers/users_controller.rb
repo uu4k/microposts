@@ -1,8 +1,12 @@
 class UsersController < ApplicationController
   before_action :correct_user, only: [:edit,:update]
   def show
-   @user = User.find(params[:id])
-   @microposts = @user.microposts
+    @user = User.find(params[:id])
+    @microposts = @user.microposts.order(created_at: :desc).page(params[:page])
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def new
@@ -12,7 +16,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      flash[:success] = "Welcome to the Sample App!"
+      flash[:success] = t(:user_created)
       redirect_to @user
     else
       render 'new'
@@ -24,7 +28,7 @@ class UsersController < ApplicationController
   
   def update
     if @user.update_attributes(user_params)
-      flash[:success] = "Setting updated"
+      flash[:success] = t(:user_updated)
       redirect_to @user
     else
       render 'edit'
@@ -39,6 +43,15 @@ class UsersController < ApplicationController
   def followers
     @user = User.find(params[:id])
     @follower_users = @user.follower_users
+  end
+  
+  def favorites
+    @user = User.find(params[:id])
+    @microposts = @user.favorite_microposts.page(params[:page])
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
   
   private
